@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lh708.microcloud.dao.DepartmentDao">
+    <resultMap id="Dept" type="com.lh708.microservice.entities.Department">
+        <id column="id" property="id"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="source_name" property="dataSource"/>
+    </resultMap>
+
+    <select id="findById" resultMap="Dept" parameterType="Long">
+		select id,dept_name,source_name from tb_dept where id=#{id};
+	</select>
+    <select id="findAll" resultMap="Dept">
+		select id,dept_name,source_name from tb_dept;
+	</select>
+    <insert id="addEntity" parameterType="com.lh708.microservice.entities.Department">
+		INSERT INTO tb_dept(dept_name,source_name) VALUES(#{deptName},DATABASE());
+	</insert>
+
+</mapper>
